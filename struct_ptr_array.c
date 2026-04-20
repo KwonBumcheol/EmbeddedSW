@@ -1,17 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Pos {
-    int x;
-    int y;
+struct Pos { // 8byte
+    int x; // 4byte
+    int y; // 4byte
 };
 
 int main() {
-    struct Pos p[3];
-    struct Pos *ptr[3];
+    struct Pos p[3]; // 8 x 3 = 24byte
+    struct Pos *ptr[3]; // 8 x 3 = 24byte
 
-    for(int i = 0; i < sizeof(ptr)/sizeof(struct Pos*); i++)
-        ptr[i] = (struct Pos*)malloc(sizeof(struct Pos));
+    for(int i = 0; i < sizeof(ptr)/sizeof(struct Pos*); i++) // sizeof(struct Pos*) -> (64bit 시스템 기준) 포인터 한개 크기(8byte) => i < 24 / 8
+        ptr[i] = malloc(sizeof(struct Pos));  // => ptr[i] = 8byte
+        // ㄴ> ptr[i] = (struct Pos*)malloc(sizeof(struct Pos)); c에서는 동적할당시 반환 타입 자동으로 변환됨.
 
     for(int i = 0; i < sizeof(p)/sizeof(struct Pos); i++) {
         p[i].x = (i + 1) * 10; p[i].y = (i + 1) * 10;

@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-/* 파일 복사 프로그램 */
+/* 파일 복사 프로그램 file1 -> file2 복사 */
 int main(int argc, char *argv[]) {
     int fd1, fd2, n;
     char buf[BUFSIZ];
@@ -22,7 +22,7 @@ int main(int argc, char *argv[]) {
         exit(3);
     }
 
-    while ((n = read(fd1, buf, BUFSIZ)) > 0)
-        write(fd2, buf, n); // 읽은 내용을 쓴다.
+    while ((n = read(fd1, buf, BUFSIZ)) > 0) // fd1 -> buf
+        write(fd2, buf, n); // 읽은 내용을 쓴다. buf -> fd2
     exit(0);
 }

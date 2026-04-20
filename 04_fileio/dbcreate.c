@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     printf("%-9s %-8s %-4s\n", "학번", "이름", "점수");
     while (scanf("%d %s %d", &record.id, record.name, &record.score) == 3) {
         lseek(fd, (record.id - START_ID) * sizeof(record), SEEK_SET);
-        write(fd, (char *)&record, sizeof(record));
+        write(fd, &record, sizeof(record)); // write(fd, (char *)&record, sizeof(record));
     }
     close(fd);
     exit(0);
