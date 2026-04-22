@@ -7,9 +7,10 @@
 int main() {
     int pid;
     pid = fork();
-    if (pid == 0) { // 자식 프로세스
-        printf("[Child]: Hello, world pid=%d\n", getpid());
-    } else { // 부모 프로세스
-        printf("[Parent]: Hello, world pid=%d\n", getpid());
+
+    if (pid == 0) { // 자식 프로세스는 리턴값 = 0 
+        printf("[Child]: Hello, world pid=%d\n", getpid()); // 자식 프로세스
+    } else {
+        printf("[Parent]: Hello, world pid=%d\n", getpid()); // 부모 프로세스
     }
 }

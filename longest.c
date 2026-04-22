@@ -14,7 +14,7 @@ int main() {
             len = strlen(line);
             if (len > max) {
                 max = len;
-                copy(line, longest);
+                copy(line, longest); // longest에 복사
             }
         }
     if (max > 0) // 입력 줄이 있었다면

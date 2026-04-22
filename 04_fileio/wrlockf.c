@@ -22,12 +22,13 @@ int main(int argc, char *argv[]) {
     printf("\n수정할 학생의 학번 입력:");
     while (scanf("%d", &id) == 1) {
         lseek(fd, (long)(id - START_ID) * sizeof(record), SEEK_SET);
+
         if (lockf(fd, F_LOCK, sizeof(record)) == -1) {
             perror(argv[1]);
             exit(3);
         }
 
-        if ((read(fd, (char*)&record, sizeof(record)) > 0) && (record.id != 0))
+        if ((read(fd, &record, sizeof(record)) > 0) && (record.id != 0))
             printf("이름: %s\t 학번: %d\t 점수: %d\n", record.name, record.id, record.score);
         else
             printf("레코드 %d 없음\n", id);
@@ -36,10 +37,10 @@ int main(int argc, char *argv[]) {
         scanf("%d", &record.score);
         
         lseek(fd, -(long)sizeof(record), SEEK_CUR);
-        write(fd, (char*) &record, sizeof(record));
+        write(fd, &record, sizeof(record));
 
         lseek(fd, (long)(id - START_ID) * sizeof(record), SEEK_SET);
-        fcntl(fd, F_UNLCK, sizeof(record)); // 잠금 해제
+        lockf(fd, F_ULOCK, sizeof(record)); // fcntl(fd, F_UNLCK, sizeof(record)); // 잠금 해제
         printf("\n수정할 학생의 학번 입력:");
     }
 

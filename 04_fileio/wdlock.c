@@ -22,10 +22,10 @@ int main(int argc, char *argv[]){
 
     printf("\n수정할 학생의 학번 입력:");
     while (scanf("%d", &id) == 1) {
-        lock.l_type = F_WRLCK;
-        lock.l_whence = SEEK_SET;
-        lock.l_start = (id - START_ID) * sizeof(record);
-        lock.l_len = sizeof(record);
+        lock.l_type = F_WRLCK; // 쓰기 잠금 - 읽거나 쓰기 불가
+        lock.l_whence = SEEK_SET; // 파일 시작점 기준
+        lock.l_start = (id - START_ID) * sizeof(record); // 레코드 시작 위치
+        lock.l_len = sizeof(record); // 레코드 1개 크기만큼 잠금
 
         if(fcntl(fd, F_SETLKW, &lock) == -1) {
             // 쓰기 잠금
@@ -35,7 +35,7 @@ int main(int argc, char *argv[]){
 
         lseek(fd, (long)(id - START_ID) * sizeof(record), SEEK_SET);
 
-        if ((read(fd, (char*)&record, sizeof(record)) > 0) && (record.id != 0))
+        if ((read(fd, &record, sizeof(record)) > 0) && (record.id != 0))
             printf("이름: %s\t 학번: %d\t 점수: %d\n", record.name, record.id, record.score);
         else
             printf("레코드 %d 없음\n", id);
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
         scanf("%d", &record.score);
         
         lseek(fd, -(long)sizeof(record), SEEK_CUR);
-        write(fd, (char*) &record, sizeof(record));
+        write(fd, &record, sizeof(record));
 
         lock.l_type = F_UNLCK;
         fcntl(fd, F_SETLK, &lock); // 잠금 해제

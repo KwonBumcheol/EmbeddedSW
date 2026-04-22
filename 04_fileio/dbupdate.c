@@ -24,15 +24,17 @@ int main(int argc, char *argv[]) {
         if (scanf("%d", &id) == 1) {
             lseek(fd, (long)(id - START_ID) * sizeof(record), SEEK_SET);
             
-            if ((read(fd, (char *)&record, sizeof(record)) > 0) && (record.id != 0)) {
+            if ((read(fd, &record, sizeof(record)) > 0) && (record.id != 0)) {
                 printf("학번: %8d\t 이름: %4s\t 점수: %4d\n", record.id, record.name, record.score);
                 printf("새로운 점수: ");
                 scanf("%d", &record.score);
 
                 lseek(fd, (long) -sizeof(record), SEEK_CUR);
-                write(fd, (char *) &record, sizeof(record));
+                write(fd, &record, sizeof(record));
             } else printf("레코드 %d 없음\n", id);
+
         } else printf("입력 오류");
+        
         printf("계속하시겠습니까?(Y/N)");
         scanf(" %c", &c);
     } while (c == 'Y');

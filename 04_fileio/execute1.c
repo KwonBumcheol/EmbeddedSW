@@ -6,10 +6,9 @@
 int main() {
     printf("부모 프로세스 시작\n");
     if (fork() == 0) {
-        execl("/bin/echo", "echo", "hello", NULL); // path, arg0 ... , NULL
-        // execlp("echo", "echo", "hello", NULL); // file, arg0 ... , NULL
+        execl("/bin/echo", "echo", "hello", NULL);
         fprintf(stderr, "첫 번째 실패");
         exit(1);
     }
-    printf("부모 프로세스 끝\n");
+    printf ("부모 프로세스 끝\n");
 }
