@@ -3,7 +3,7 @@
 #include <string.h>
 
 int *add(int a, int b) {
-    int *ptr = malloc(sizeof(int)); // int *ptr = (int*)malloc(sizeof(int));
+    int *ptr = malloc(sizeof(int)); 
     *ptr = a + b;
     printf("addr = %p\n", ptr);
 

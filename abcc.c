@@ -2,8 +2,8 @@
 
 int main(void) {
     int num = 13;
-    int *ptr;
-    int **dptr;
+    int *ptr; // 포인터
+    int **dptr; // 이중 포인터
 
     ptr = &num;
     dptr = &ptr;

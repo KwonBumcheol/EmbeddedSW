@@ -8,7 +8,7 @@ int main() {
     ptr = &num;
     printf("%p, %d\n", ptr, *ptr);
 
-    ptr = (int*)malloc(sizeof(int));
+    ptr = malloc(sizeof(int)); // ptr = (int*)malloc(sizeof(int));
 
     *ptr = 123;
     printf("%p, %d\n", ptr, *ptr);
