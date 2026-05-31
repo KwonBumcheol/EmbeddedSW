@@ -1,16 +1,16 @@
 #!/bin/bash
                 
-TEST_GPIO=17   
+TEST_GPIO=17   # GPIO 17 제어
 
-function setTEST {
+function setTEST { # GPIO 값 변경
     if [ "$1" == "1" ]; then
-        sudo pinctrl set $TEST_GPIO dh
+        sudo pinctrl set $TEST_GPIO dh # HIGH 출력
     else
-        sudo pinctrl set $TEST_GPIO dl
+        sudo pinctrl set $TEST_GPIO dl # LOW 출력
     fi
 }
 
-if [ $# -ne 1 ]; then
+if [ $# -ne 1 ]; then # 인자의 개수($#)가 정확히 1개가 아닐경우
     echo "Usage: bashTEST [setup|on|off|status|close]"
     exit 2
 fi
