@@ -3,17 +3,15 @@
 #include <stdio.h>
 #include <math.h>
 
+// a ~ b 적분
 double integrate(double a, double b, int n) {
     double sum = 0, dx = (b - a) / n;
-    
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         sum += sin((a + i) * dx);
     }
-
     return sum * dx;
 }
 
 int main() {
     printf("%f\n", integrate(0, 3.141592, 100000));
-    return 0;
 }

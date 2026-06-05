@@ -13,6 +13,7 @@ double integrate (double a, double b, int n) {
         return sum * dx;
 }
 
+// cpp_intgr.so 를 ctypes에서 사용하기 위한 조건 - name mangling(C++) -> extern "C" 사용으로 함수 이름 고정
 // extern "C" {
 //     double integrate (double a, double b, int n) {
 //         double sum = 0, dx = (b - a)/n;

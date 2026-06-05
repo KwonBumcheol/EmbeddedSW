@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-typedef int (*CallbackType)(int); // 구문을 깔끔하게 정리하기 위해 사용
+typedef int (*CallbackType)(int); // (int)매개변수로 받고 int를 반환하는 함수 포인터 타입을 CallbackType이라는 이름으로 부르겠다 -> int 함수이름(int x)
 
 int squareCallback(int x) { // 제곱 계산하는 콜백함수
     return x*x;
@@ -18,7 +18,7 @@ int doMath(int num, CallbackType callback) {
 
 int main() {
     cout << "Math program -- the value of 5: " << endl;
-    cout << "->squared is: " << doMath(5, &squareCallback) << endl;
+    cout << "->squared is: " << doMath(5, &squareCallback); // squareCallback(5)
     cout << "->cubed is: " << doMath(5, &cubeCallback) << endl;
     return 0;
 }
