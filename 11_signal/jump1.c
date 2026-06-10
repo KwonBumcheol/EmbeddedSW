@@ -7,7 +7,7 @@ void p1(), p2();
 jmp_buf env;
 
 int main() {
-    if (setjmp(env) != 0) {
+    if (setjmp(env) != 0) { // 1. setjmp(env) 만나서 0 반환 / 3. 1 != 0
         printf("오류로 인해 복귀\n");
         exit(0);
     } else printf("처음 통과\n");
@@ -25,6 +25,6 @@ void p2() {
     error = 1; // error 발생했다고 가정
     if(error) {
         printf("오류\n");
-        longjmp(env, 1); // -> setjmp(1) 으로 복귀
+        longjmp(env, 1); // 2. -> setjmp(1) 으로 복귀
     }
 }

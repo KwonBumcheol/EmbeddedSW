@@ -1,4 +1,4 @@
-// 1번 C 코드
+// 병렬화X
 
 #include <stdio.h>
 #include <math.h>

@@ -2,11 +2,12 @@
 #include <pthread.h>
 
 int x = 0;
-pthread_mutex_t lock;
+pthread_mutex_t lock; // 접근제한 자원 - 잠금장치(lock)
 
 void *thread_func(void *arg) {
     for (int i = 0; i < 100000; i++) {
-        pthread_mutex_lock(&lock);
+        // 임계구역
+        pthread_mutex_lock(&lock); // 스레드 1개만 들어갈 수 있음 - t1 끝나면 -> t2 스레드 실행
         x++;
         pthread_mutex_unlock(&lock);
     }
@@ -17,7 +18,7 @@ void *thread_func(void *arg) {
 int main() {
     pthread_t t1, t2;
 
-    pthread_mutex_init(&lock, NULL);
+    pthread_mutex_init(&lock, NULL); // 뮤텍스 초기화
 
     pthread_create(&t1, NULL, thread_func, NULL);
     pthread_create(&t2, NULL, thread_func, NULL);

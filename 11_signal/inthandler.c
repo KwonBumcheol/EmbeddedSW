@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <unistd.h> // pause() - 시그널 받기 전까지 해당 프로세스 잠들게 함
 #include <signal.h>
 
 void intHandler();
 
 int main() {
-    signal(SIGINT, intHandler);
+    signal(SIGINT, intHandler); // ctrl+c 누르면 시그널 발생 -> intHandler 실행
 
     while(1) {
         pause();

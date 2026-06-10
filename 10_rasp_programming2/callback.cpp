@@ -18,7 +18,7 @@ int doMath(int num, CallbackType callback) {
 
 int main() {
     cout << "Math program -- the value of 5: " << endl;
-    cout << "->squared is: " << doMath(5, &squareCallback); // squareCallback(5)
+    cout << "->squared is: " << doMath(5, &squareCallback) << endl; // == (5, squareCallback)
     cout << "->cubed is: " << doMath(5, &cubeCallback) << endl;
     return 0;
 }

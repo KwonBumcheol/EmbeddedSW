@@ -11,7 +11,7 @@ jmp_buf env;
 int main() {
     signal(SIGINT, intHandler); // 시그널(CTRL+C) 발생시 -> intHandler 호출
 
-    if (setjmp(env) != 0) {
+    if (setjmp(env) != 0) { // 0
         printf("인터럽트로 인해 복귀\n");
         exit(0);
     } else printf("처음 통과\n");
